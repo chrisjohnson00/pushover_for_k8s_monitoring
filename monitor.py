@@ -5,7 +5,7 @@ from pushover import Client
 
 
 def main():
-    print("INFO: Starting...", flush=True)
+    print("INFO: {} Starting...".format(datetime.now().strftime("%b %d %H:%M:%S")), flush=True)
     try:
         config.load_kube_config()
     except Exception:
@@ -27,7 +27,7 @@ def main():
     except Exception:
         send_pushover_notification("Kube Cluster Error", "Unable to query the cluster!")
         exit("Barf, die, can't query the cluster")
-    print("INFO: Done!", flush=True)
+    print("INFO: {} Done!".format(datetime.now().strftime("%b %d %H:%M:%S")), flush=True)
 
 
 def send_pushover_notification(title, message):
