@@ -23,7 +23,7 @@ def main():
                         unready_pods.append(item.metadata.name)
         if len(unready_pods) > 0:
             send_pushover_notification("There are unready pods", " ".join(unready_pods))
-    except Exeption:
+    except Exception:
         send_pushover_notification("Kube Cluster Error", "Unable to query the cluster!")
         exit("Barf, die, can't query the cluster")
     print("INFO: Done!", flush=True)
