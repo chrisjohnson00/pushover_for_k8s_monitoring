@@ -1,5 +1,6 @@
 from kubernetes import client, config
 import os
+import time
 from pushover import Client
 
 
@@ -41,4 +42,6 @@ if __name__ == '__main__':
     if not os.environ.get("PUSHOVER_API_TOKEN"):
         exit("Yo, dude, come on!  I need a PUSHOVER_API_TOKEN environment variable to work, bra!")
     PUSHOVER_API_TOKEN = os.environ.get("PUSHOVER_API_TOKEN")
-    main()
+    while True:
+        main()
+        time.sleep(3600)
