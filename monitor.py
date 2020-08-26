@@ -27,6 +27,7 @@ def main():
             send_pushover_notification("There are unready pods", " ".join(unready_pods))
     except Exception:
         send_pushover_notification("Kube Cluster Error", "Unable to query the cluster!")
+        time.sleep(900)
         exit("Barf, die, can't query the cluster")
     print("INFO: {} Done!".format(datetime.now().strftime("%b %d %H:%M:%S")), flush=True)
 
