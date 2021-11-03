@@ -18,11 +18,13 @@ def main():
         unready_pods = []
         for item in ret.items:
             conditions = item.status.conditions
-            for condition in conditions:
-                if condition.type == "Ready" and condition.reason != "PodCompleted":
-                    if condition.status == "False":
-                        print("WARN: Uh-oh, this guy's not ready {}".format(item.metadata.name))
-                        unready_pods.append(item.metadata.name)
+            # sometimes pods come back with no conditions because they failed scheduling after being scheduled? WTF
+            if conditions:
+                for condition in conditions:
+                    if condition.type == "Ready" and condition.reason != "PodCompleted":
+                        if condition.status == "False":
+                            print("WARN: Uh-oh, this guy's not ready {}".format(item.metadata.name))
+                            unready_pods.append(item.metadata.name)
         if len(unready_pods) > 0:
             send_pushover_notification("There are unready pods", " ".join(unready_pods))
     except Exception as e:

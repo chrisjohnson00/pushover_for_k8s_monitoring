@@ -11,3 +11,12 @@ A simple, quick solution to send Pushover messages based on kubernetes pod statu
   * `export PUSHOVER_APP_ID=yourid`
   * `export PUSHOVER_API_TOKEN=yourtoken` shhh, it's secret!
  * Fire it up with `python3 monitor.py`
+
+# Pypi Dependencies
+
+To upgrade these dependencies (and pip itself), run:
+
+    pip install --upgrade pip setuptools==57.5.0
+    pip install --upgrade flake8 kubernetes python-pushover
+    pip freeze > requirements.txt
+    sed -i '/pkg_resources/d' requirements.txt
